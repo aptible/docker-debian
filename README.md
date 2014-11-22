@@ -17,7 +17,6 @@ Debian base image with custom Aptible patches and Dockerfile building tools.
 ## Included Tools/Patches
 
 * `bats`: The [Bats](https://github.com/sstephenson/bats) Bash Automated Testing System
-* `git`: Git Version Control System.
 
 ## Tests
 

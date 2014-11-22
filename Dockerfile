@@ -1,18 +1,18 @@
 FROM debian:wheezy
 MAINTAINER Frank Macreery <frank@macreery.com>
 
-ONBUILD RUN apt-get update
-RUN apt-get update
+# Add custom files
+# TODO: Figure out why `ADD files /` creates a huge layer
+ADD files/root/bashrc /root/.bashrc
+ADD files/usr/bin/apt-install /usr/bin/apt-install
 
-# Install Git
-RUN apt-get install -y git
-
-# Add custom .bashrc
-ADD files/bashrc /root/.bashrc
+# Install wget
+RUN apt-install wget ca-certificates
 
 # Install Bats
-RUN git clone https://github.com/sstephenson/bats.git /tmp/bats && \
-    cd /tmp/bats && ./install.sh /usr/local
+RUN wget https://github.com/sstephenson/bats/archive/v0.4.0.tar.gz && \
+    tar xzf v0.4.0.tar.gz && cd bats-0.4.0 && ./install.sh /usr/local && \
+    cd .. && rm -rf v0.4.0.tar.gz bats-0.4.0
 
 # Integration tests
 ADD test /tmp/test
