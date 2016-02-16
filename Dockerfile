@@ -9,6 +9,9 @@ ADD files/usr/bin/apt-install /usr/bin/apt-install
 # Install wget
 RUN apt-install wget ca-certificates
 
+# Updates
+RUN apt-install libc6
+
 # Install Bats
 RUN wget https://github.com/sstephenson/bats/archive/v0.4.0.tar.gz && \
     tar xzf v0.4.0.tar.gz && cd bats-0.4.0 && ./install.sh /usr/local && \
