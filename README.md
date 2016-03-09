@@ -1,6 +1,9 @@
 # ![](https://gravatar.com/avatar/11d3bc4c3163e3d238d558d5c9d98efe?s=64) aptible/debian
 
-[![Docker Repository on Quay.io](https://quay.io/repository/aptible/debian/status)](https://quay.io/repository/aptible/debian)
+[![Docker Repository on
+Quay.io](https://quay.io/repository/aptible/debian/status)](https://quay.io/repository/aptible/debian)
+[![Build
+Status](https://travis-ci.org/aptible/docker-debian.svg?branch=master)](https://travis-ci.org/aptible/docker-debian)
 
 Debian base image with custom Aptible patches and Dockerfile building tools.
 
@@ -11,7 +14,9 @@ Debian base image with custom Aptible patches and Dockerfile building tools.
 
 ## Available Tags
 
-* `latest`: Debian 7 (Wheezy)
+* `latest`: Debian 8 (Jessie)
+* `stretch`: Debian 9 (Stretch - not stable yet)
+* `jessie`: Debian 8 (Wheezy)
 * `wheezy`: Debian 7 (Wheezy)
 
 ## Included Tools/Patches
