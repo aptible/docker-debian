@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM debian:<%= ENV.fetch 'TAG' %>
 MAINTAINER Frank Macreery <frank@macreery.com>
 
 # Add custom files
