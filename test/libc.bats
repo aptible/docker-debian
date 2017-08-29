@@ -8,6 +8,6 @@
   dpkg -s libc6 | grep Version
   v="$(dpkg -s libc6 | grep "Version" | sed 's/Version: //g')"
   dpkg -s libc6 | grep -E "^Version: 2\.13-38\+deb7u[1-9][0-9]+$" || \
-  dpkg -s libc6 | grep -E "^Version: 2\.19-18\+deb8u([3-9]|(\d\d+))$" || \
+  dpkg -s libc6 | grep -E "^Version: 2\.19-18\+deb8u([3-9]|([0-9][0-9]+))$" || \
   dpkg --compare-versions "$v" ge "2.21-9"
 }
