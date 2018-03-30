@@ -7,7 +7,7 @@ ADD files/root/bashrc /root/.bashrc
 ADD files/usr/bin/apt-install /usr/bin/apt-install
 
 # Install wget
-RUN apt-install wget ca-certificates
+RUN apt-install wget ca-certificates tzdata
 
 # Install latest security updates now, and on build
 RUN grep security /etc/apt/sources.list > /tmp/security.list
