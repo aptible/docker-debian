@@ -6,17 +6,25 @@ MAINTAINER Frank Macreery <frank@macreery.com>
 ADD files/root/bashrc /root/.bashrc
 ADD files/usr/bin/apt-install /usr/bin/apt-install
 
+# Install latest security updates now, and on build
+# During build, we use a different CDN to allow fixing DSA 4371-1.
+
+RUN SECURITY_LIST=$(mktemp) \
+ && echo "deb http://cdn-fastly.deb.debian.org/debian-security <%= ENV.fetch 'TAG' %>/updates main" > "$SECURITY_LIST" \
+ && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" -o Acquire::http::AllowRedirect=false update \
+ && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" -o Acquire::http::AllowRedirect=false upgrade -y \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm "$SECURITY_LIST"
+
+ONBUILD RUN SECURITY_LIST=$(mktemp) \
+ && grep security /etc/apt/sources.list > "$SECURITY_LIST" \
+ && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" update \
+ && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" upgrade -y \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm "$SECURITY_LIST"
+
 # Install wget
 RUN apt-install wget ca-certificates tzdata
-
-# Install latest security updates now, and on build
-RUN grep security /etc/apt/sources.list > /tmp/security.list
-RUN apt-get -o Dir::Etc::SourceList=/tmp/security.list update \
- && apt-get -o Dir::Etc::SourceList=/tmp/security.list upgrade -y \
- && rm -rf /var/lib/apt/lists/*
-ONBUILD RUN apt-get -o Dir::Etc::SourceList=/tmp/security.list update \
-         && apt-get -o Dir::Etc::SourceList=/tmp/security.list upgrade -y \
-         && rm -rf /var/lib/apt/lists/*
 
 # Install Bats
 RUN wget https://github.com/sstephenson/bats/archive/v0.4.0.tar.gz && \
