@@ -15,9 +15,8 @@ Debian base image with custom Aptible patches and Dockerfile building tools.
 ## Available Tags
 
 * `latest`: Debian 8 (Jessie)
-* `stretch`: Debian 9 (Stretch - not stable yet)
-* `jessie`: Debian 8 (Wheezy)
-* `wheezy`: Debian 7 (Wheezy)
+* `stretch`: Debian 9 (Stretch)
+* `jessie`: Debian 8 (Jessie)
 
 ## Included Tools/Patches
 
