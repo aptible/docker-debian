@@ -6,7 +6,6 @@ services:
 
 env:
   matrix:
-    - TAG=wheezy
     - TAG=jessie
     - TAG=stretch
 
