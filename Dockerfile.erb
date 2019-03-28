@@ -10,7 +10,7 @@ ADD files/usr/bin/apt-install /usr/bin/apt-install
 # During build, we use a different CDN to allow fixing DSA 4371-1.
 
 RUN SECURITY_LIST=$(mktemp) \
- && echo "deb http://cdn-fastly.deb.debian.org/debian-security <%= ENV.fetch 'TAG' %>/updates main" > "$SECURITY_LIST" \
+ && echo "deb http://security-cdn.debian.org/debian-security <%= ENV.fetch 'TAG' %>/updates main" > "$SECURITY_LIST" \
  && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" -o Acquire::http::AllowRedirect=false update \
  && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" -o Acquire::http::AllowRedirect=false upgrade -y \
  && rm -rf /var/lib/apt/lists/* \
