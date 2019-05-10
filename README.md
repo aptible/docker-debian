@@ -38,4 +38,4 @@ To push the Docker image to Quay, run the following command:
 
 MIT License, see [LICENSE](LICENSE.md) for details.
 
-Copyright (c) 2014 [Aptible](https://www.aptible.com), [Frank Macreery](https://github.com/fancyremarker), and contributors.
+Copyright (c) 2019 [Aptible](https://www.aptible.com), [Frank Macreery](https://github.com/fancyremarker), and contributors.
