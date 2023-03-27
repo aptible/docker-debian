@@ -1,31 +1,20 @@
 # ![](https://gravatar.com/avatar/11d3bc4c3163e3d238d558d5c9d98efe?s=64) aptible/debian
 
-[![Docker Repository on
-Quay.io](https://quay.io/repository/aptible/debian/status)](https://quay.io/repository/aptible/debian)
-[![Build
-Status](https://travis-ci.org/aptible/docker-debian.svg?branch=master)](https://travis-ci.org/aptible/docker-debian)
-
 Debian base image with custom Aptible patches and Dockerfile building tools.
 
 ## Intended Use
 
-This image is used internally by Aptible. We do not recommend that customers
-use this repo, and instead recommend the Official Docker Debian image:
+This image is used internally by Aptible. Aptible customers should not
+use this repo, and instead we recommend the Official Docker Debian image:
 https://hub.docker.com/_/debian
 
-Please see our [FAQ](https://www.aptible.com/documentation/deploy/tutorials/faq/aptible-base-images.html)
-for further information.
-
-## Installation and Usage
-
-    docker pull quay.io/aptible/debian
-    docker run -i -t quay.io/aptible/debian
 
 ## Available Tags
 
-* `latest`: Debian 8 (Jessie)
-* `stretch`: Debian 9 (Stretch)
-* `jessie`: Debian 8 (Jessie)
+* `latest`: Debian 11 (Bullseye)
+* `bullseye`: Debian 11
+* `buster`: Debian 10
+* `stretch`: Debian 9
 
 ## Included Tools/Patches
 
@@ -37,11 +26,6 @@ Tests are run as part of the `Dockerfile` build. To execute them separately with
 
     bats test
 
-## Deployment
-
-To push the Docker image to Quay, run the following command:
-
-    make release
 
 ## Copyright and License
 
