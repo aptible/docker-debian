@@ -1,1 +1,1 @@
-LATEST_TAG = jessie
+LATEST_TAG = bullseye
