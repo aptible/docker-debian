@@ -91,6 +91,11 @@ ifeq "$(TAG)" "$(LATEST_TAG)"
 	docker tag "$(REGISTRY)/$(REPOSITORY):$(TAG)" "$(REGISTRY)/$(REPOSITORY):latest"
 endif
 
+build-local: $(TAG)/Dockerfile
+	docker build --platform=amd64 -t "$(REGISTRY)/$(REPOSITORY):$(TAG)" -f "$(TAG)/Dockerfile" .
+ifeq "$(TAG)" "$(LATEST_TAG)"
+	docker tag "$(REGISTRY)/$(REPOSITORY):$(TAG)" "$(REGISTRY)/$(REPOSITORY):latest"
+endif
 
 # Per-tag Dockerfile target. Look for Dockerfile or Dockerfile.erb in the root, and use it for $(TAG).
 # We prioritize Dockerfile.erb over Dockerfile if both are present.
@@ -117,5 +122,5 @@ $(TAG):
 	mkdir -p "$(TAG)"
 
 
-.PHONY: push test build $(TAG)/Dockerfile
+.PHONY: push test build build-local $(TAG)/Dockerfile
 .DEFAULT_GOAL := test
