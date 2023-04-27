@@ -11,11 +11,18 @@ ADD files/usr/bin/apt-install /usr/bin/apt-install
 
 RUN SECURITY_LIST=$(mktemp) \
  && NAME=<%= tag=ENV.fetch('TAG'); %w[stretch buster].include?(tag) ? tag : "#{tag}-security" %> \
- && echo "deb http://security-cdn.debian.org/debian-security ${NAME}/updates main" > "$SECURITY_LIST" \
+ && echo "deb http://<%= tag=ENV.fetch('TAG'); tag == 'stretch' ? "archive.debian.org" : "security-cdn.debian.org" %>/debian-security ${NAME}/updates main" > "$SECURITY_LIST" \
  && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" -o Acquire::http::AllowRedirect=false update \
  && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" -o Acquire::http::AllowRedirect=false upgrade -y \
  && rm -rf /var/lib/apt/lists/* \
  && rm "$SECURITY_LIST"
+
+# This follows: https://stackoverflow.com/a/76094521 as stretch updates have been moved/removed from
+# the original links
+RUN bash -c "if [[ <%= tag=ENV.fetch('TAG') %> == 'stretch' ]]; then \
+    sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    sed -i '/stretch-updates/d' /etc/apt/sources.list; fi"
 
 ONBUILD RUN SECURITY_LIST=$(mktemp) \
  && grep security /etc/apt/sources.list > "$SECURITY_LIST" \
