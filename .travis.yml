@@ -6,6 +6,7 @@ services:
 
 env:
   matrix:
+    - TAG=bookworm
     - TAG=stretch
     - TAG=buster
     - TAG=bullseye

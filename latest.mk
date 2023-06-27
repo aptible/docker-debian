@@ -1,1 +1,1 @@
-LATEST_TAG = bullseye
+LATEST_TAG = bookworm
