@@ -1,5 +1,4 @@
-FROM debian:<%= ENV.fetch 'TAG' %>
-MAINTAINER Frank Macreery <frank@macreery.com>
+FROM --platform=linux/x86_64 debian:<%= ENV.fetch 'TAG' %>
 
 # Add custom files
 # TODO: Figure out why `ADD files /` creates a huge layer
@@ -24,12 +23,16 @@ RUN bash -c "if [[ <%= tag=ENV.fetch('TAG') %> == 'stretch' ]]; then \
     sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
     sed -i '/stretch-updates/d' /etc/apt/sources.list; fi"
 
+
+# Changing this as bookworm doesn't have anything at /etc/apt/sources.list
+<% if ENV.fetch('TAG') != 'bookworm' %>
 ONBUILD RUN SECURITY_LIST=$(mktemp) \
  && grep security /etc/apt/sources.list > "$SECURITY_LIST" \
  && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" update \
  && apt-get -o "Dir::Etc::SourceList=${SECURITY_LIST}" upgrade -y \
  && rm -rf /var/lib/apt/lists/* \
  && rm "$SECURITY_LIST"
+<% end %>
 
 # Install wget
 RUN apt-install wget ca-certificates tzdata
