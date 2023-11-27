@@ -1,5 +1,6 @@
 ARG VERSION
-FROM --platform=linux/x86_64 debian:${VERSION}
+ARG TAG
+FROM --platform=linux/x86_64 debian:${TAG}
 ENV VERSION=${VERSION}
 # Add custom files
 # TODO: Figure out why `ADD files /` creates a huge layer

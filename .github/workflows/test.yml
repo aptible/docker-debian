@@ -44,7 +44,8 @@ jobs:
       with:
         context: .
         build-args: |
-          "VERSION=${{ matrix.version }}"
+          TAG=${{ matrix.version }}
+          VERSION=${{ matrix.version }}
         file: ./Dockerfile
         push: false
         target: ${{ steps.metadata.outputs.images }}
