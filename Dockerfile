@@ -30,7 +30,7 @@ ONBUILD RUN bash -c "if [ '${TAG}' != 'bookworm' ]; then \
  SECURITY_LIST=$(mktemp) \
  && grep security /etc/apt/sources.list > '${SECURITY_LIST}' \
  && apt-get -o 'Dir::Etc::SourceList=${SECURITY_LIST}' update \
- && apt-get -o 'Dir::Etc::SourceList=${SECURITY_LIST}'' upgrade -y \
+ && apt-get -o 'Dir::Etc::SourceList=${SECURITY_LIST}' upgrade -y \
  && rm -rf /var/lib/apt/lists/* \
  && rm '${SECURITY_LIST}'; fi"
 
