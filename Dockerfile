@@ -8,7 +8,7 @@ ADD files/usr/bin/apt-install /usr/bin/apt-install
 # Install latest security updates now, and on build
 # During build, we use a different CDN to allow fixing DSA 4371-1.
 ARG VERSION
-RUN export VERSION=${VERSION} && echo $VERSION
+RUN export VERSION=${VERSION}
 
 RUN SECURITY_LIST=$(mktemp) \
  && if [ "$VERSION" = 'stretch' ] || [ "$VERSION" = 'buster' ]; then export NAME="$VERSION"; else export NAME="$VERSION-security"; fi \
@@ -22,7 +22,7 @@ RUN SECURITY_LIST=$(mktemp) \
 # the original links
 RUN if [ "$VERSION" == 'stretch' ]; then \
     sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
-    sed -i 's|deb.debian.org|archive.debian.o/rg|g' /etc/apt/sources.list && \
+    sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
     sed -i '/stretch-updates/d' /etc/apt/sources.list; fi
 
 
