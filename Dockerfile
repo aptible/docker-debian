@@ -1,3 +1,4 @@
+ARG TAG
 FROM --platform=linux/x86_64 debian:${TAG}
 
 # Add custom files

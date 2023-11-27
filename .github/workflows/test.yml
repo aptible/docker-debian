@@ -43,7 +43,8 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: .
-        build-args: TAG=${{ steps.metadata.outputs.tags }}
+        build-args: |
+          TAG=${{ steps.metadata.outputs.tags }}
         file: ./Dockerfile
         push: false
         target: ${{ steps.metadata.outputs.images }}
