@@ -8,7 +8,7 @@ ADD files/usr/bin/apt-install /usr/bin/apt-install
 
 # Install latest security updates now, and on build
 # During build, we use a different CDN to allow fixing DSA 4371-1.
-RUN VERSION=${VERSION}
+RUN VERSION=${VERSION} && echo $VERSION
 
 RUN SECURITY_LIST=$(mktemp) \
  && if [ "$VERSION" = 'stretch' ] || [ "$VERSION" = 'buster' ]; then export NAME="$VERSION"; else export NAME="$VERSION-security"; fi \
