@@ -12,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        version: ['stretch','buster','bullseye','bookworm']
+        version: ['stretch','buster','bullseye','bookworm','latest']
     runs-on: ubuntu-latest
     env:
       REPOSITORY: debian
