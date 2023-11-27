@@ -1,6 +1,6 @@
 ARG TAG
 FROM --platform=linux/x86_64 debian:${TAG}
-
+ENV TAG=${TAG}
 # Add custom files
 # TODO: Figure out why `ADD files /` creates a huge layer
 ADD files/root/bashrc /root/.bashrc
