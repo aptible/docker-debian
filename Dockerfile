@@ -25,7 +25,6 @@ RUN if [ "$VERSION" == 'stretch' ]; then \
     sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
     sed -i '/stretch-updates/d' /etc/apt/sources.list; fi
 
-
 # Changing this as bookworm doesn't have anything at /etc/apt/sources.list
 ONBUILD RUN if [ "$VERSION" != 'bookworm' ]; then \
  SECURITY_LIST=$(mktemp) \
