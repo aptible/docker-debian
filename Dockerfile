@@ -8,6 +8,7 @@ ADD files/usr/bin/apt-install /usr/bin/apt-install
 
 # Install latest security updates now, and on build
 # During build, we use a different CDN to allow fixing DSA 4371-1.
+RUN echo "$TAG"
 
 RUN SECURITY_LIST=$(mktemp) \
  && if [ "$TAG" = 'stretch' ] || [ "$TAG" = 'buster' ]; then export NAME="$TAG"; else export NAME="$TAG-security"; fi \
