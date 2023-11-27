@@ -20,7 +20,11 @@ RUN SECURITY_LIST=$(mktemp) \
 
 # This follows: https://stackoverflow.com/a/76094521 as stretch updates have been moved/removed from
 # the original links
-RUN if [ "$VERSION" == 'stretch' ]; then sed -i 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list && sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list && sed -i '/stretch-updates/d' /etc/apt/sources.list; fi
+RUN if [ "$VERSION" == 'stretch' ]; then \ 
+ sed -i 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+ && sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+ && sed -i '/stretch-updates/d' /etc/apt/sources.list \
+ && apt update; fi
 
 # Changing this as bookworm doesn't have anything at /etc/apt/sources.list
 ONBUILD RUN if [ "$VERSION" != 'bookworm' ]; then \
