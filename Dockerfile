@@ -26,7 +26,7 @@ RUN if [ "$VERSION" = 'stretch' ]; then \
  && sed -i '/stretch-updates/d' '/etc/apt/sources.list'; fi
 
 # Changing this as bookworm doesn't have anything at /etc/apt/sources.list
-ONBUILD RUN if [ "$VERSION" != 'bookworm' ]; then \
+ONBUILD RUN if [ "$VERSION" != 'bookworm' ] || [ "$VERSION" = 'latest' ] ; then \
  SECURITY_LIST=$(mktemp) \
  && grep security /etc/apt/sources.list > $SECURITY_LIST \
  && apt-get -o "Dir::Etc::SourceList=$SECURITY_LIST" update \
