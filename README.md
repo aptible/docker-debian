@@ -11,7 +11,8 @@ https://hub.docker.com/_/debian
 
 ## Available Tags
 
-* `latest`: Debian 11 (Bullseye)
+* `latest`: Debian 12 (bookworm)
+* `bookworm`: Debian 12
 * `bullseye`: Debian 11
 * `buster`: Debian 10
 * `stretch`: Debian 9
