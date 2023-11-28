@@ -10,7 +10,7 @@ ADD files/usr/bin/apt-install /usr/bin/apt-install
 ARG VERSION
 RUN export VERSION=${VERSION}
 
-RUN if ["$VERSION" = 'latest']; then export VERSION=bookworm; fi
+RUN if [ "$VERSION" = 'latest' ]; then export VERSION="bookworm"; fi
 
 RUN SECURITY_LIST=$(mktemp) \
  && if [ "$VERSION" = 'stretch' ] || [ "$VERSION" = 'buster' ]; then export NAME="$VERSION"; else export NAME="$VERSION-security"; fi \
@@ -28,7 +28,7 @@ RUN if [ "$VERSION" = 'stretch' ]; then \
  && sed -i '/stretch-updates/d' '/etc/apt/sources.list'; fi
 
 # Changing this as bookworm doesn't have anything at /etc/apt/sources.list
-ONBUILD RUN if [ "$VERSION" != 'bookworm' ] || [ "$VERSION" = 'latest' ] ; then \
+ONBUILD RUN if [ "$VERSION" != 'bookworm' ]; then \
  SECURITY_LIST=$(mktemp) \
  && grep security /etc/apt/sources.list > $SECURITY_LIST \
  && apt-get -o "Dir::Etc::SourceList=$SECURITY_LIST" update \
