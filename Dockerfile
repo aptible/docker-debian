@@ -10,6 +10,8 @@ ADD files/usr/bin/apt-install /usr/bin/apt-install
 ARG VERSION
 RUN export VERSION=${VERSION}
 
+RUN if ["$VERSION" = 'latest']; then export VERSION=bookworm; fi
+
 RUN SECURITY_LIST=$(mktemp) \
  && if [ "$VERSION" = 'stretch' ] || [ "$VERSION" = 'buster' ]; then export NAME="$VERSION"; else export NAME="$VERSION-security"; fi \
  && if [ "$VERSION" = 'stretch' ]; then echo "deb http://archive.debian.org/debian-security $NAME/updates main" > $SECURITY_LIST; else echo "deb http://security-cdn.debian.org/debian-security $NAME/updates main" > $SECURITY_LIST; fi \
